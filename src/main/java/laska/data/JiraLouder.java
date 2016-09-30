@@ -1,0 +1,118 @@
+package laska.data;
+
+import java.io.IOException;
+import java.util.List;
+
+import net.rcarz.jiraclient.BasicCredentials;
+import net.rcarz.jiraclient.Issue;
+import net.rcarz.jiraclient.JiraClient;
+import net.rcarz.jiraclient.JiraException;
+import net.rcarz.jiraclient.Issue.SearchResult;
+
+/**
+ * Містить методи для роботи з сервером Jira
+ * @author laska
+ *
+ */
+public class JiraLouder {
+	
+	/**
+	 * Завантажуєвсю інформацію про задачу з вказаним ключем
+	 * @param key
+	 * @return
+	 * @throws IOException
+	 * @throws JiraException
+	 */
+	public static Issue loadIssue(String key) throws IOException, JiraException{
+		//читаємо адресу сервера, логін та пароль
+		Conf conf = Conf.getCong();
+		BasicCredentials creds = new BasicCredentials(conf.getUserName(), conf.getPassword());
+		JiraClient jira = new JiraClient(conf.getJiraUrl(), creds);
+
+		Issue sr= jira.getIssue(key);
+		return sr;
+	}
+	
+	/**
+	 * Загружає з сервера інформацію про завдачу з ключем key.
+	 * Метод ефективніше використовувати, якщо цікавить тільки зміна статусу
+	 * @param key
+	 * @return null - задача не змінила статус
+	 * @throws IOException 
+	 * @throws JiraException 
+	 */
+	public static Issue loadIssue1(IIssue is) throws IOException, JiraException{
+		//читаємо адресу сервера, логін та пароль
+		Conf conf = Conf.getCong();
+		BasicCredentials creds = new BasicCredentials(conf.getUserName(), conf.getPassword());
+		JiraClient jira = new JiraClient(conf.getJiraUrl(), creds);
+		
+		//відправляємо JQL запит
+		String jql = String.format("issueKey = %s AND "
+				+"status CHANGED AFTER '%s'", 
+				is.getKey(), is.jiraDateTime());
+		System.out.println(jql);
+		SearchResult sr= jira.searchIssues(jql);
+		return sr.issues.isEmpty()?null:sr.issues.get(0);
+	}
+	
+	/**
+	 * Загружає з сервера інформацію про завдачу з ключем key.
+	 * @return null - якщо в задачі нічого не змінилося
+	 * @throws IOException 
+	 * @throws JiraException
+	 */ 
+	public static Issue loadIssue2(IIssue is) throws Exception{
+		//читаємо адресу сервера, логін та пароль
+		Conf conf = Conf.getCong();
+		BasicCredentials creds = new BasicCredentials(conf.getUserName(), conf.getPassword());
+		JiraClient jira = new JiraClient(conf.getJiraUrl(), creds);
+	  
+		IDateTime dt = is.getOptimalDate();
+		if (dt == null) return null;
+		//відправляємо JQL запит
+		String jql = String.format("issueKey = %s AND "
+				+"updated > '%s'", 
+				is.getKey(), dt.jiraDateTime());
+		System.out.println(jql);
+		SearchResult sr= jira.searchIssues(jql);
+		return sr.issues.isEmpty()?null:sr.issues.get(0);
+	}
+	
+	/**
+	 * Загружає з сервера список нових задач
+	 * @return
+	 * @throws JiraException 
+	 */
+	public static List<Issue> loadAllNewIssue(IDateTime dt) throws JiraException{
+		Conf conf = Conf.getCong();
+		BasicCredentials creds = new BasicCredentials(conf.getUserName(), conf.getPassword());
+		JiraClient jira = new JiraClient(conf.getJiraUrl(), creds);
+
+		String jql = String.format("assignee = currentUser() AND "
+				+ "status in (open, 'to do', 'reopened') AND created > '%s'",  
+				dt.jiraDateTime());
+		SearchResult sr= jira.searchIssues(jql);
+		return sr.issues;
+	}
+	
+	/**
+	 * Намагається авторизуватися на сервері
+	 * @return true - якщо авторизаці пройшла успішно
+	 */
+	public static boolean testLogin(){
+		boolean r = true;
+		Conf c = Conf.getCong();
+		BasicCredentials creds = new BasicCredentials(c.getUserName(), c.getPassword());
+		JiraClient jira = new JiraClient(c.getJiraUrl(), creds);
+		try {
+			jira.searchIssues("assignee=currentUser()", 0);
+		} catch (JiraException e) {
+			e.printStackTrace();
+			r = false;
+		}
+		return r;
+	}
+}
+
+

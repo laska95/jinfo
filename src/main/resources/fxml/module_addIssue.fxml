@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label text="Добавити завдання" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="212.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="68.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="72.0" spacing="5.0" GridPane.columnIndex="1">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#showHideMore" prefHeight="10.0" prefWidth="10.0" styleClass="set" text="S" />
+                        <Button mnemonicParsing="false" onAction="#addIssue" prefHeight="10.0" prefWidth="10.0" styleClass="add" text="A" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Label text="Ключ:" />
+                        <TextField fx:id="tf_key" prefHeight="26.0" prefWidth="158.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <VBox fx:id="p_more" prefWidth="100.0" spacing="8.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <Label text="Повідомляти про:" />
+                  <CheckBox fx:id="cb_st" mnemonicParsing="false" selected="true" text="зміну стану" />
+                  <CheckBox fx:id="cb_com" mnemonicParsing="false" text="нові коментарі" />
+                  <CheckBox fx:id="cb_wl" mnemonicParsing="false" text="нові робочі записи" />
+               </children>
+            </VBox>
+            <Label fx:id="info" styleClass="error" text="Label" wrapText="true" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

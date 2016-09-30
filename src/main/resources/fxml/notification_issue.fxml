@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="79.0" layoutY="-16.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label styleClass="title" text="Задача змінила статус" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="l_type" text="Завдання" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="300.0" spacing="10.0">
+                     <children>
+                        <Label text="Ключ:" />
+                        <Label fx:id="l_key" text="ISSUE-8" />
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <Label fx:id="l_sub" text="Тема завдання" />
+            <HBox prefWidth="300.0" spacing="10.0">
+               <children>
+                  <Label text="Новий статус:" />
+                  <Label fx:id="l_status" text="Статус" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="300.0">
+               <children>
+                  <Hyperlink fx:id="h_link" onAction="#open" text="Відкрити в браузері" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

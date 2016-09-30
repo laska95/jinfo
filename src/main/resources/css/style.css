@@ -1,0 +1,58 @@
+
+Label, TextFlow{	
+	-fx-font-size: 10pt;
+}
+
+TextField, PasswordField{
+	-fx-font-size: 10pt;
+}
+
+Button{
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+	-fx-pref-width: 150px;
+}
+
+.grad{
+	/*
+	-fx-background-image: url('../fon.png');
+	-fx-background-size: contain;	
+	-fx-border-color: #2B5AA6;
+	-fx-border-width: 2px;
+	-fx-border-style: solid;
+	* 
+	*/
+}
+
+.error{
+	/*колір тексту */
+	-fx-text-fill: red;
+}
+
+.set, .del, .add{
+	-fx-max-height: 24px;
+	-fx-max-width: 24px;
+	-fx-min-height: 24px;
+	-fx-min-width: 24px;
+	-fx-background-size: contain;
+}
+
+.set{
+	-fx-background-image: url('../set.png');
+}
+
+.del{
+	-fx-background-image: url('../del.png');
+}
+.add{
+	-fx-background-image: url('../add.png');
+}
+Hyperlink::after{
+	-fx-background-image: url('../link.png');
+	-fx-min-width: 10px;
+	-fx-scale-y: 5px;
+}
+.title{
+	-fx-font-size: 14pt;
+	-fx-font-weight: bold;
+}

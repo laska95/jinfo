@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefWidth="300.0" style="-fx-background-color: silver;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="79.0" layoutY="-16.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label fx:id="title" text="Додано новий..." />
+            <GridPane prefHeight="20.0" prefWidth="280.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="89.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="191.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1">
+                     <children>
+                        <Label fx:id="l_time" text="Label" />
+                        <Label fx:id="l_date" text="Label" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="key" text="Label" />
+               </children>
+            </GridPane>
+            <HBox prefWidth="300.0" spacing="10.0">
+               <children>
+                  <Label text="Автор:" />
+                  <Label fx:id="l_aut" text="Автор" />
+               </children>
+            </HBox>
+            <Label fx:id="l_body" prefWidth="300.0" text="Label" wrapText="true" />
+            <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="300.0">
+               <children>
+                  <Hyperlink fx:id="h_link" maxWidth="180.0" onAction="#open" text="Відкрити в браузері" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
